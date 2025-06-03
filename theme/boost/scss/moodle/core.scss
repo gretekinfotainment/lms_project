@@ -2181,11 +2181,7 @@ $footer-link-color: $bg-inverse-link-color !default;
 }
 
 .btn-footer-popover {
-    display: none;
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    @include box-shadow($popover-box-shadow);
+    visibility: hidden;
 }
 
 .btn-footer-communication {

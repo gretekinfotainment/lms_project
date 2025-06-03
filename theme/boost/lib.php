@@ -80,17 +80,40 @@ function theme_boost_get_extra_scss($theme) {
  * @return bool
  */
 function theme_boost_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
-    if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'backgroundimage' ||
-        $filearea === 'loginbackgroundimage')) {
-        $theme = theme_config::load('boost');
-        // By default, theme files must be cache-able by both browsers and proxies.
-        if (!array_key_exists('cacheability', $options)) {
-            $options['cacheability'] = 'public';
+    if ($context->contextlevel == CONTEXT_SYSTEM) {
+        // Handle the original file areas
+        if ($filearea === 'logo' || $filearea === 'backgroundimage' || $filearea === 'loginbackgroundimage') {
+            $theme = theme_config::load('boost');
+            // By default, theme files must be cache-able by both browsers and proxies.
+            if (!array_key_exists('cacheability', $options)) {
+                $options['cacheability'] = 'public';
+            }
+            return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
         }
-        return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
-    } else {
-        send_file_not_found();
+        
+        // Handle the achievement_images file area
+        else if ($filearea === 'achievement_images') {
+            // Extract the filename / filepath from the $args array.
+            $itemid = array_shift($args);
+            $filename = array_pop($args);
+            $filepath = implode('/', $args) . '/';
+            
+            // Retrieve the file from the Files API.
+            $fs = get_file_storage();
+            $file = $fs->get_file($context->id, 'theme_boost', $filearea, $itemid, $filepath, $filename);
+            if (!$file) {
+                return false; // The file does not exist.
+            }
+            
+            // Send the file back.
+            send_stored_file($file, null, 0, $forcedownload, $options);
+            return true;
+        }
     }
+    
+    // File not found or context not valid
+    send_file_not_found();
+    return false;
 }
 
 /**
@@ -191,3 +214,5 @@ function theme_boost_get_pre_scss($theme) {
 
     return $scss;
 }
+
+

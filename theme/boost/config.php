@@ -173,6 +173,7 @@ $THEME->layouts = [
     )
 ];
 
+
 $THEME->parents = [];
 $THEME->enable_dock = false;
 $THEME->extrascsscallback = 'theme_boost_get_extra_scss';
@@ -185,6 +186,9 @@ $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
 $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
 $THEME->haseditswitch = true;
 $THEME->usescourseindex = true;
+$THEME->images = array(
+    'background' => 'background.jpg'
+);
 // By default, all boost theme do not need their titles displayed.
 $THEME->activityheaderconfig = [
     'notitle' => true

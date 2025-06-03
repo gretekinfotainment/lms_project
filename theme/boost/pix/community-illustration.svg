@@ -1,0 +1,91 @@
+<!-- community-illustration.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <!-- Yellow Circle Background -->
+  <circle cx="300" cy="200" r="150" fill="#FDDB33" opacity="0.7" />
+  
+  <!-- Blue Circle Background -->
+  <circle cx="400" cy="300" r="70" fill="#4CC9F0" opacity="0.7" />
+
+  <!-- People Group Illustration -->
+  <!-- Person 1 -->
+  <g transform="translate(200, 150)">
+    <circle cx="0" cy="-30" r="25" fill="#F8F9FA" stroke="#333" stroke-width="2" />
+    <path d="M-15,-35 C-12,-30 -5,-30 0,-35 C5,-30 12,-30 15,-35" stroke="#333" stroke-width="2" fill="none" />
+    <circle cx="-10" cy="-40" r="3" fill="#333" />
+    <circle cx="10" cy="-40" r="3" fill="#333" />
+    <path d="M0,10 C-15,10 -25,0 -25,-15 L-25,-25 C-25,-35 -15,-40 0,-40 C15,-40 25,-35 25,-25 L25,-15 C25,0 15,10 0,10" fill="#F8F9FA" stroke="#333" stroke-width="2" />
+    <path d="M-20,10 L-30,60" stroke="#333" stroke-width="2" />
+    <path d="M20,10 L30,60" stroke="#333" stroke-width="2" />
+    <path d="M0,10 L0,60" stroke="#333" stroke-width="2" />
+    <path d="M-30,60 L-15,100" stroke="#333" stroke-width="2" />
+    <path d="M30,60 L15,100" stroke="#333" stroke-width="2" />
+  </g>
+
+  <!-- Person 2 -->
+  <g transform="translate(270, 180)">
+    <circle cx="0" cy="-30" r="23" fill="#F8F9FA" stroke="#333" stroke-width="2" />
+    <path d="M-14,-35 C-10,-28 -5,-28 0,-33 C5,-28 10,-28 14,-35" stroke="#333" stroke-width="2" fill="none" />
+    <circle cx="-8" cy="-38" r="3" fill="#333" />
+    <circle cx="8" cy="-38" r="3" fill="#333" />
+    <path d="M-10,-45 L-15,-55 L-5,-50 Z" fill="#333" />
+    <path d="M0,5 C-15,5 -22,-5 -22,-20 L-22,-25 C-22,-35 -15,-40 0,-40 C15,-40 22,-35 22,-25 L22,-20 C22,-5 15,5 0,5" fill="#F8F9FA" stroke="#333" stroke-width="2" />
+    <path d="M-20,5 L-25,50" stroke="#333" stroke-width="2" />
+    <path d="M20,5 L25,50" stroke="#333" stroke-width="2" />
+    <path d="M-25,50 L-15,90" stroke="#333" stroke-width="2" />
+    <path d="M25,50 L15,90" stroke="#333" stroke-width="2" />
+  </g>
+
+  <!-- Person 3 -->
+  <g transform="translate(330, 150)">
+    <circle cx="0" cy="-30" r="25" fill="#F8F9FA" stroke="#333" stroke-width="2" />
+    <path d="M-15,-30 C-10,-25 -5,-25 0,-30 C5,-25 10,-25 15,-30" stroke="#333" stroke-width="2" fill="none" />
+    <circle cx="-10" cy="-35" r="3" fill="#333" />
+    <circle cx="10" cy="-35" r="3" fill="#333" />
+    <rect x="-15" y="-50" width="30" height="15" rx="5" fill="#333" />
+    <path d="M0,10 C-15,10 -25,0 -25,-15 L-25,-25 C-25,-35 -15,-40 0,-40 C15,-40 25,-35 25,-25 L25,-15 C25,0 15,10 0,10" fill="#F8F9FA" stroke="#333" stroke-width="2" />
+    <path d="M-15,10 L-20,60" stroke="#333" stroke-width="2" />
+    <path d="M15,10 L20,60" stroke="#333" stroke-width="2" />
+    <path d="M-20,60 L-10,100" stroke="#333" stroke-width="2" />
+    <path d="M20,60 L10,100" stroke="#333" stroke-width="2" />
+  </g>
+
+  <!-- Person 4 - Waving -->
+  <g transform="translate(400, 170)">
+    <circle cx="0" cy="-30" r="22" fill="#F8F9FA" stroke="#333" stroke-width="2" />
+    <path d="M-12,-35 C-8,-30 -4,-30 0,-35 C4,-30 8,-30 12,-35" stroke="#333" stroke-width="2" fill="none" />
+    <circle cx="-7" cy="-38" r="3" fill="#333" />
+    <circle cx="7" cy="-38" r="3" fill="#333" />
+    <path d="M0,5 C-13,5 -20,-5 -20,-15 L-20,-25 C-20,-35 -13,-38 0,-38 C13,-38 20,-35 20,-25 L20,-15 C20,-5 13,5 0,5" fill="#F8F9FA" stroke="#333" stroke-width="2" />
+    <path d="M-15,5 L-20,45" stroke="#333" stroke-width="2" />
+    <path d="M-20,45 L-10,80" stroke="#333" stroke-width="2" />
+    <path d="M15,5 L20,45" stroke="#333" stroke-width="2" />
+    <path d="M20,45 L10,80" stroke="#333" stroke-width="2" />
+    
+    <!-- Waving arm -->
+    <path d="M15,-5 L40,-50" stroke="#333" stroke-width="3" />
+    <path d="M40,-50 L60,-40" stroke="#333" stroke-width="3" />
+  </g>
+  
+  <!-- Science Icons -->
+  <g opacity="0.8">
+    <!-- Atom Icon -->
+    <circle cx="130" cy="100" r="8" fill="#333" />
+    <ellipse cx="130" cy="100" rx="30" ry="15" fill="none" stroke="#333" stroke-width="2" transform="rotate(30 130 100)" />
+    <ellipse cx="130" cy="100" rx="30" ry="15" fill="none" stroke="#333" stroke-width="2" transform="rotate(90 130 100)" />
+    <ellipse cx="130" cy="100" rx="30" ry="15" fill="none" stroke="#333" stroke-width="2" transform="rotate(150 130 100)" />
+    
+    <!-- Connection Dots -->
+    <circle cx="180" cy="130" r="5" fill="#333" />
+    <circle cx="210" cy="110" r="5" fill="#333" />
+    <circle cx="190" cy="80" r="5" fill="#333" />
+    <line x1="180" y1="130" x2="210" y2="110" stroke="#333" stroke-width="2" />
+    <line x1="210" y1="110" x2="190" y2="80" stroke="#333" stroke-width="2" />
+    <line x1="190" y1="80" x2="180" y2="130" stroke="#333" stroke-width="2" />
+    
+    <!-- Book Icon -->
+    <g transform="translate(450, 130)">
+      <rect x="-20" y="-25" width="40" height="50" rx="2" fill="#F8F9FA" stroke="#333" stroke-width="2" />
+      <path d="M-15,-15 L15,-15 M-15,-5 L5,-5 M-15,5 L10,5 M-15,15 L15,15" stroke="#333" stroke-width="2" />
+    </g>
+  </g>
+</svg>

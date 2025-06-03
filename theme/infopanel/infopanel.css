@@ -1,0 +1,210 @@
+/* infopanel.css - Replace your current CSS with this */
+
+/* Info panel container */
+.info-panel-container {
+  width: 100%;
+  margin: 30px auto;
+  background-color: #ffffff;
+  font-family: inherit;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Header area with title and tabs */
+.info-panel-header {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+/* Title styling exactly as in the image */
+.info-panel-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Simple tabs matching the image */
+.simple-tabs {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+}
+
+.simple-tab {
+  padding: 10px 0;
+  width: 50%;
+  text-align: center;
+  color: #000000;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 800;
+  position: relative;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  font-family: inherit;
+}
+
+.simple-tab.active {
+  color: #5c7cfa;
+  font-weight: 800;
+  font-size: 30px;
+  border-bottom: 2px solid #5c7cfa;
+}
+
+/* Panel content */
+.info-panel-content {
+  padding: 30px 0;
+}
+
+.info-panel {
+  display: none;
+}
+
+.info-panel.active {
+  display: block;
+}
+
+/* Panel layout */
+.simple-panel-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  padding: 0 20px;
+}
+
+/* Panel image with circle backgrounds matching the image */
+.simple-panel-image {
+  flex: 0 0 350px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.simple-panel-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 3;
+  border-radius: 10px;
+}
+
+/* Circle backgrounds visible in the image */
+
+
+.yellow-circle-overlay {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background-color: rgba(255, 230, 109, 0.7);
+  border-radius: 50%;
+  bottom: -60px;
+  right: -60px;
+  z-index: 2;
+}
+
+/* Panel text content */
+.simple-panel-text {
+  flex: 1;
+}
+
+.simple-panel-text h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+}
+
+.simple-panel-text p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #4a4a68;
+  margin-bottom: 15px;
+}
+
+.simple-panel-text ul {
+  margin-bottom: 25px;
+  padding-left: 20px;
+}
+
+.simple-panel-text li {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #4a4a68;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.simple-panel-text li:before {
+  content: "•";
+  color: #5c7cfa;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+/* Button styling */
+.info-panel-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 25px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+.info-panel-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .simple-panel-layout {
+    flex-direction: column;
+  }
+  
+  .simple-panel-image {
+    width: 100%;
+    flex: none;
+    margin-bottom: 30px;
+  }
+  
+  .info-panel-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-panel-title {
+    font-size: 2rem;
+  }
+  
+  .simple-panel-text h3 {
+    font-size: 1.6rem;
+  }
+  
+  .blue-circle-bg,
+  .yellow-circle-overlay {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+/* Hide any original elements if needed */
+.info-panel-tabs,
+.info-tab {
+  display: none !important; 
+}

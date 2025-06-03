@@ -37,9 +37,8 @@
     margin-top: $navbar-height;
     @include thin-scrolls($gray-100);
     .main-inner {
-        max-width: 100%;
-        width: 100%;
-        margin: 0 auto;
+        max-width: 1200px;
+        width: 100%; /* Changed from 100px to 100% for responsiveness */
         @include border-radius();
         background-color: $white;
         padding: 1.5rem 0.5rem;
@@ -58,10 +57,10 @@
     body.limitedwidth {
         #page.drawers {
             .main-inner {
-                max-width: $course-content-maxwidth;
+                max-width: 1426px;
             }
             .footer-popover {
-                max-width: $course-content-maxwidth;
+                max-width: 1426px;
                 width: 100%;
                 margin: 0 auto;
                 @include border-radius();
@@ -69,7 +68,7 @@
         }
     }
     .header-maxwidth {
-        max-width: $course-content-maxwidth;
+        max-width: 1426px;
         margin: 0 auto;
         padding-left: 15px;
         padding-right: 15px;

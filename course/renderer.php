@@ -422,29 +422,131 @@ class core_course_renderer extends plugin_renderer_base {
         if ($course instanceof stdClass) {
             $course = new core_course_list_element($course);
         }
-        $content = '';
-        $classes = trim('coursebox clearfix '. $additionalclasses);
-        if ($chelper->get_show_courses() < self::COURSECAT_SHOW_COURSES_EXPANDED) {
-            $classes .= ' collapsed';
+        
+        // Get the first letter of the course name for the overlay
+        $coursename = $chelper->get_course_formatted_name($course);
+        $firstletter = strtoupper(substr($coursename, 0, 1));
+        
+        // Get the category name
+        $categoryname = '';
+        if ($category = core_course_category::get($course->category, IGNORE_MISSING)) {
+            $categoryname = $category->get_formatted_name();
+        } else {
+            $categoryname = 'General';
         }
-
-        // .coursebox
-        $content .= html_writer::start_tag('div', array(
+        
+        // Get teacher name - properly check all possible sources
+        $teachername = '';
+        
+        // First try using the course contacts method directly from the course object
+        // This is the most reliable method since it respects the 'coursecontact' setting
+        $coursecontacts = $course->get_course_contacts();
+        if (!empty($coursecontacts)) {
+            $contact = reset($coursecontacts);
+            $teachername = $contact['username'];
+        } else {
+            // If no course contacts, try to find teachers directly
+            $coursecontext = context_course::instance($course->id);
+            
+            // Check for editing teachers first (roleid = 3 typically)
+            $teachers = get_role_users(3, $coursecontext);
+            if (!empty($teachers)) {
+                $teacher = reset($teachers);
+                $teachername = fullname($teacher);
+            } else {
+                // Then check for non-editing teachers (roleid = 4 typically)
+                $nonediting = get_role_users(4, $coursecontext);
+                if (!empty($nonediting)) {
+                    $teacher = reset($nonediting);
+                    $teachername = fullname($teacher);
+                }
+            }
+        }
+        
+        // If still no teacher found, use the default string
+        if (empty($teachername)) {
+            $teachername = get_string('defaultcourseteacher');
+        }
+        
+        // Get course image
+        $courseimage = '';
+        foreach ($course->get_course_overviewfiles() as $file) {
+            if ($file->is_valid_image()) {
+                $courseimage = \moodle_url::make_pluginfile_url(
+                    $file->get_contextid(), 
+                    $file->get_component(), 
+                    $file->get_filearea(),
+                    null, 
+                    $file->get_filepath(), 
+                    $file->get_filename()
+                )->out();
+                break;
+            }
+        }
+        
+        // If no image found, use a default
+        if (empty($courseimage)) {
+            $courseimage = $this->output->image_url('course-default', 'theme');
+        }
+        
+        // Get course summary
+        $summary = '';
+        if ($course->has_summary()) {
+            $summary = $chelper->get_course_formatted_summary($course, ['noclean' => true, 'para' => false]);
+            // Limit summary length
+            if (strlen(strip_tags($summary)) > 120) {
+                $summary = substr(strip_tags($summary), 0, 120) . '...';
+            }
+        }
+        
+        // Modern card HTML
+        $content = '';
+        $classes = trim('coursebox clearfix modern-style-card ' . $additionalclasses);
+        
+        // Start the card
+        $content .= html_writer::start_tag('a', [
+            'class' => 'course-card-link',
+            'href' => new \moodle_url('/course/view.php', ['id' => $course->id])
+        ]);
+        
+        $content .= html_writer::start_tag('div', [
             'class' => $classes,
             'data-courseid' => $course->id,
             'data-type' => self::COURSECAT_TYPE_COURSE,
-        ));
-
-        $content .= html_writer::start_tag('div', array('class' => 'info'));
-        $content .= $this->course_name($chelper, $course);
-        $content .= $this->course_enrolment_icons($course);
-        $content .= html_writer::end_tag('div');
-
-        $content .= html_writer::start_tag('div', array('class' => 'content'));
-        $content .= $this->coursecat_coursebox_content($chelper, $course);
-        $content .= html_writer::end_tag('div');
-
+        ]);
+        
+        // Image with first letter overlay
+        $content .= html_writer::start_tag('div', ['class' => 'course-image']);
+        $content .= html_writer::empty_tag('img', ['src' => $courseimage, 'alt' => $coursename]);
+        $content .= html_writer::tag('div', $firstletter, ['class' => 'course-letter-overlay']);
+        $content .= html_writer::end_tag('div'); // .course-image
+        
+        // Course information
+        $content .= html_writer::start_tag('div', ['class' => 'course-info']);
+        $content .= html_writer::tag('div', '⋮', ['class' => 'course-menu']);
+        $content .= html_writer::tag('h3', $coursename);
+        
+        if (!empty($summary)) {
+            $content .= html_writer::tag('p', $summary, ['class' => 'course-description']);
+        }
+        
+        // Teacher name
+        $content .= html_writer::start_tag('div', ['class' => 'course-meta']);
+        $content .= html_writer::start_tag('div', ['class' => 'course-teacher']);
+        $content .= html_writer::tag('span', $teachername, ['class' => 'course-meta-label']);
+        $content .= html_writer::end_tag('div'); // .course-teacher
+        $content .= html_writer::end_tag('div'); // .course-meta
+        
+        $content .= html_writer::end_tag('div'); // .course-info
+        
+        // Footer with category
+        $content .= html_writer::start_tag('div', ['class' => 'course-footer']);
+        $content .= html_writer::tag('div', $categoryname, ['class' => 'course-category']);
+        $content .= html_writer::end_tag('div'); // .course-footer
+        
         $content .= html_writer::end_tag('div'); // .coursebox
+        $content .= html_writer::end_tag('a'); // .course-card-link
+        
         return $content;
     }
 
@@ -577,7 +679,7 @@ class core_course_renderer extends plugin_renderer_base {
         if ($course instanceof stdClass) {
             $course = new core_course_list_element($course);
         }
-        $content = \html_writer::start_tag('div', ['class' => 'd-flex']);
+        $content = \html_writer::start_tag('div');
         $content .= $this->course_overview_files($course);
         $content .= \html_writer::start_tag('div', ['class' => 'flex-grow-1']);
         $content .= $this->course_summary($chelper, $course);

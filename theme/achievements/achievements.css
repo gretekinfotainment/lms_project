@@ -1,0 +1,338 @@
+/* Updated Achievements Section Styling to Match Image 2 Layout Exactly */
+.achievements-section-container {
+  width: 100%;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
+.achievements-section-container .achievements-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  text-align: left;
+}
+
+/* New grid layout matching Image 2 exactly */
+.achievements-section-container .achievements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+/* Special positioning for the first achievement card - full height of the left column */
+.achievements-section-container .achievement-card:first-child {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  height: 100%;
+}
+
+/* Card styling */
+.achievements-section-container .achievement-card {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 225px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* First card is taller */
+.achievements-section-container .achievement-card:first-child {
+  height: 470px;
+}
+
+.achievements-section-container .achievement-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.achievements-section-container .achievement-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.achievements-section-container .achievement-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Category title styling */
+.achievements-section-container .achievement-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 25px 25px;
+  /* Gradient overlay for text visibility */
+  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4), transparent);
+  text-align: left;
+}
+
+.achievements-section-container .achievement-caption h3 {
+  font-size: 24px;
+  color: white;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.achievements-section-container .achievement-caption p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Admin action buttons styling */
+.achievements-section-container .achievement-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.achievements-section-container .achievement-card:hover .achievement-actions {
+  opacity: 1;
+}
+
+.achievements-section-container .edit-achievement-btn,
+.achievements-section-container .delete-achievement-btn {
+  background-color: rgba(0, 90, 158, 0.9);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.achievements-section-container .delete-achievement-btn {
+  background-color: rgba(220, 53, 69, 0.9);
+}
+
+.achievements-section-container .edit-achievement-btn:hover {
+  background-color: #003a66;
+}
+
+.achievements-section-container .delete-achievement-btn:hover {
+  background-color: #c82333;
+}
+
+/* Add achievement card styling */
+.achievements-section-container .add-achievement-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 225px;
+  border: 2px dashed #ccc;
+  background-color: rgba(240, 240, 240, 0.5);
+  border-radius: 6px;
+  box-shadow: none;
+  transition: background-color 0.3s ease;
+  grid-column: auto;
+  grid-row: auto;
+}
+
+.achievements-section-container .add-achievement-btn {
+  background-color: #005a9e;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.achievements-section-container .add-achievement-btn:hover {
+  background-color: #003a66;
+  transform: scale(1.1);
+}
+
+/* Maintain existing modal styling */
+.achievement-editor-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.achievement-editor-content {
+  background-color: white;
+  width: 90%;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.achievement-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.achievement-editor-header h3 {
+  margin: 0;
+  color: #005a9e;
+}
+
+.close-editor-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #777;
+}
+
+.achievement-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.achievement-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.achievement-form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.achievement-form-group input,
+.achievement-form-group textarea,
+.achievement-form-group select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.achievement-form-group input[type="file"] {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.achievement-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.achievement-save-btn,
+.achievement-cancel-btn {
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.achievement-save-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
+.achievement-cancel-btn {
+  background-color: #f8f9fa;
+  color: #212529;
+  border: 1px solid #ddd;
+}
+
+.achievement-save-btn:hover {
+  background-color: #218838;
+}
+
+.achievement-cancel-btn:hover {
+  background-color: #e2e6ea;
+}
+
+/* Success message styling */
+.success-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 15px;
+  border-radius: 4px;
+  z-index: 9999;
+  animation: fadeInOut 3s forwards;
+}
+
+/* Error message styling */
+.error-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #dc3545;
+  color: white;
+  padding: 15px;
+  border-radius: 4px;
+  z-index: 9999;
+  animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Animation for fade in effect */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .achievements-section-container .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .achievements-section-container .achievement-card:first-child {
+    grid-column: 1;
+    grid-row: auto;
+    height: 225px;
+  }
+  
+  .achievements-section-container .achievement-caption h3 {
+    font-size: 20px;
+  }
+}

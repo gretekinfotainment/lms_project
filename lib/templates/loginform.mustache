@@ -100,20 +100,6 @@
 }}
 
 <div class="loginform">
-    {{#logourl}}
-        <div id="loginlogo" class="login-logo">
-            <img id="logoimage" src="{{logourl}}" class="img-fluid" alt="{{sitename}}"/>
-            <h1 class="login-heading visually-hidden">{{#str}} loginto, core, {{sitename}} {{/str}}</h1>
-        </div>
-    {{/logourl}}
-    {{^logourl}}
-        <h1 class="login-heading mb-4">{{#str}} loginto, core, {{sitename}} {{/str}}</h1>
-    {{/logourl}}
-    {{#maintenance}}
-        <div class="alert alert-danger login-maintenance">
-            {{{maintenance}}}
-        </div>
-    {{/maintenance}}
     {{#error}}
         <a href="#" id="loginerrormessage" class="visually-hidden">{{error}}</a>
         <div class="alert alert-danger" role="alert">{{error}}</div>
@@ -122,100 +108,34 @@
         <a href="#" id="logininfomessage" class="visually-hidden">{{info}}</a>
         <div class="alert alert-info" role="alert">{{info}}</div>
     {{/info}}
-    {{#cansignup}}
-        <a href="{{signupurl}}" class="visually-hidden">{{#str}} tocreatenewaccount {{/str}}</a>
-    {{/cansignup}}
-    {{#showloginform}}
-        <form class="login-form" action="{{loginurl}}" method="post" id="login">
-            <input id="anchor" type="hidden" name="anchor" value="">
-            <script>document.getElementById('anchor').value = location.hash;</script>
-            <input type="hidden" name="logintoken" value="{{logintoken}}">
-            <div class="login-form-username mb-3">
-                <label for="username" class="visually-hidden">
-                    {{^canloginbyemail}}
-                        {{#str}} username {{/str}}
-                    {{/canloginbyemail}}
-                    {{#canloginbyemail}}
-                        {{#str}} usernameemail {{/str}}
-                    {{/canloginbyemail}}
-                </label>
-                <input type="text" name="username" id="username" {{!
-                    !}}class="form-control form-control-lg" {{!
-                    !}}value="{{username}}" {{!
-                    !}}placeholder="{{^canloginbyemail}}{{#cleanstr}}username{{/cleanstr}}{{/canloginbyemail}}{{!
-                    !}}{{#canloginbyemail}}{{#cleanstr}}usernameemail{{/cleanstr}}{{/canloginbyemail}}" {{!
-                    !}}autocomplete="username">
-            </div>
-            <div class="login-form-password mb-3">
-                <label for="password" class="visually-hidden">{{#str}} password {{/str}}</label>
-                <input type="password" name="password" id="password" value="" {{!
-                    !}}class="form-control form-control-lg" {{!
-                    !}}placeholder="{{#cleanstr}}password{{/cleanstr}}" {{!
-                    !}}autocomplete="current-password">
-            </div>
-            {{#recaptcha}}
-                <div class="login-form-recaptcha mb-3">
-                    {{{recaptcha}}}
-                </div>
-            {{/recaptcha}}
-            <div class="login-form-submit mb-3">
-                <button class="btn btn-primary btn-lg" type="submit" id="loginbtn">{{#str}}login{{/str}}</button>
-            </div>
-            <div class="login-form-forgotpassword mb-3">
-                <a href="{{forgotpasswordurl}}">{{#str}}forgotaccount{{/str}}</a>
-            </div>
-        </form>
-    {{/showloginform}}
-    {{#hasidentityproviders}}
-        <div class="login-divider"></div>
-        <div class="login-identityproviders">
-            <h2 class="login-heading">{{#str}} potentialidps, auth {{/str}}</h2>
-            {{#identityproviders}}
-                <a class="btn login-identityprovider-btn w-100" href="{{url}}">
-                    {{#iconurl}}
-                        <img src="{{iconurl}}" alt="" width="24" height="24"/>
-                    {{/iconurl}}
-                    {{name}}
-                </a>
-            {{/identityproviders}}
+    <form class="login-form" action="{{loginurl}}" method="post" id="login">
+        <input id="anchor" type="hidden" name="anchor" value="">
+        <script>document.getElementById('anchor').value = location.hash;</script>
+        <input type="hidden" name="logintoken" value="{{logintoken}}">
+        <div class="login-form-username mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" id="username" 
+                   class="form-control form-control-lg" 
+                   value="{{username}}" 
+                   placeholder="Username" 
+                   autocomplete="username">
         </div>
-    {{/hasidentityproviders}}
-    {{#hasinstructions}}
-        <div class="login-divider"></div>
-        <div class="login-instructions {{#cansignup}}mb-3{{/cansignup}}">
-            <h2 class="login-heading">{{#str}}firsttime{{/str}}</h2>
-            {{{instructions}}}
+        <div class="login-form-password mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" id="password" value="" 
+                   class="form-control form-control-lg" 
+                   placeholder="Password" 
+                   autocomplete="current-password">
         </div>
-    {{/hasinstructions}}
-    {{#cansignup}}
-        <div class="login-signup">
-            <a class="btn btn-secondary" href="{{signupurl}}">{{#str}}startsignup{{/str}}</a>
-        </div>
-    {{/cansignup}}
-    {{#canloginasguest}}
-        <div class="login-divider"></div>
-        <h2 class="login-heading">{{#str}}someallowguest{{/str}}</h2>
-        <form action="{{loginurl}}" method="post" id="guestlogin">
-            <input type="hidden" name="logintoken" value="{{logintoken}}">
-            <input type="hidden" name="username" value="guest" />
-            <input type="hidden" name="password" value="guest" />
-            <button class="btn btn-secondary" type="submit" id="loginguestbtn">{{#str}}loginguest{{/str}}</button>
-        </form>
-    {{/canloginasguest}}
-    <div class="login-divider"></div>
-    <div class="d-flex">
-        {{#languagemenu}}
-            <div class="login-languagemenu">
-                {{>core/action_menu}}
+        {{#recaptcha}}
+            <div class="login-form-recaptcha mb-3">
+                {{{recaptcha}}}
             </div>
-            <div class="divider border-start align-self-center mx-3"></div>
-        {{/languagemenu}}
-        <button type="button" class="btn btn-secondary" {{!
-        }} data-modal="alert"{{!
-        }} data-modal-title-str='["cookiesenabled", "core"]' {{!
-        }} data-modal-content-str='["cookiesenabled_help_html", "core"]'{{!
-        }}>{{#str}}cookiesnotice{{/str}}</button>
-    </div>
+        {{/recaptcha}}
+        <div class="login-form-submit mb-3">
+            <button class="btn btn-submit btn-lg" type="submit" id="loginbtn">Sign In</button>
+        </div>
+    </form>
 </div>
 
 {{#js}}
@@ -245,8 +165,5 @@
     {{/togglepassword}}
     require(['core_form/submit'], function(Submit) {
         Submit.init("loginbtn");
-        {{#canloginasguest}}
-            Submit.init("loginguestbtn");
-        {{/canloginasguest}}
     });
 {{/js}}

@@ -71,4 +71,5 @@ if (!during_initial_install()) { //do not use during installation
 
         $ADMIN->add('frontpage', $temp);
     }
+    
 }

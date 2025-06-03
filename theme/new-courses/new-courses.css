@@ -1,0 +1,256 @@
+/* new-courses.css - Final customized Kaggle-style cards */
+
+.newly-added-courses-section {
+    margin: 30px auto 40px;
+    font-family: inherit;
+}
+
+/* Section heading - left-aligned */
+.newly-added-courses-section .section-heading {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    text-align: left;
+}
+
+.newly-added-courses-section .section-subheading {
+    text-align: left;
+    color: #4a4a68;
+    font-size: 1.05rem;
+    margin-bottom: 30px;
+    padding-left: 15px;
+    line-height: 1.6;
+}
+
+/* Course cards container - Kaggle-style layout */
+.newly-added-courses-section .course-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 15px;
+}
+
+/* Make the entire card clickable */
+.newly-added-courses-section .course-card-link {
+    text-decoration: none;
+    color: inherit;
+    width: 280px;  /* Narrower width for Kaggle-style */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: block;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.newly-added-courses-section .course-card-link:hover {
+    transform: translateY(-5px);
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Individual course card - Kaggle style */
+.newly-added-courses-section .course-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    height: 100%;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+}
+
+.newly-added-courses-section .course-card-link:hover .course-card {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Course image container */
+.newly-added-courses-section .course-image {
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+}
+
+.newly-added-courses-section .course-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* First letter course overlay */
+.newly-added-courses-section .course-letter-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 36px;
+    height: 36px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: #20BEFF;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Menu options button */
+.newly-added-courses-section .course-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+}
+
+.newly-added-courses-section .course-menu {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    color: #666;
+    font-weight: bold;
+}
+
+/* Course title styling - Kaggle style */
+.newly-added-courses-section .course-info h3 {
+    font-size: 1.1rem;
+    margin: 0 15px 5px 0;
+    font-weight: 600;
+    color: #1a1a2e;
+    line-height: 1.4;
+}
+
+/* Course description - Kaggle style */
+.newly-added-courses-section .course-description {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* Course metadata - teacher name */
+.newly-added-courses-section .course-meta {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.newly-added-courses-section .course-teacher {
+    display: flex;
+    align-items: center;
+}
+
+.newly-added-courses-section .course-meta-label {
+    font-weight: 500;
+}
+
+/* Card footer with category name */
+.newly-added-courses-section .course-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-top: 1px solid #eee;
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+}
+
+.newly-added-courses-section .course-category {
+    font-weight: 600;
+    color: #333;
+}
+
+/* No courses message */
+.newly-added-courses-section .no-courses-message {
+    text-align: center;
+    padding: 30px;
+}
+
+.newly-added-courses-section .no-courses-message p {
+    margin-bottom: 20px;
+    color: #4a4a68;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Add course button */
+.newly-added-courses-section .add-course-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 25px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+.newly-added-courses-section .add-course-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+    text-decoration: none;
+    color: #fff;
+}
+
+.newly-added-courses-section .add-course-btn i {
+    margin-right: 8px;
+}
+/* CSS for NEW badge only - preserves existing heading styles */
+
+/* NEW badge styling */
+.newly-added-courses-section .new-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #673ab7;
+    color: white;
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 3px;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Pulse animation for the NEW badge */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.newly-added-courses-section .new-badge {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .newly-added-courses-section .section-heading {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .newly-added-courses-section .section-heading {
+        font-size: 2rem;
+    }
+    
+    .newly-added-courses-section .course-cards {
+        justify-content: center;
+    }
+}

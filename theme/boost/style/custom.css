@@ -1,0 +1,123 @@
+/* Background image for login page */
+body.pagelayout-login {
+    background-image: url('/theme/your_theme/pix/background.jpg'); /* Update this path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center the login container */
+.pagelayout-login #page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+}
+
+/* Login container styling */
+.pagelayout-login #region-main {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+/* Login form container */
+.login-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    max-width: 400px;
+    border-radius: 10px;
+    padding: 30px !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15) !important;
+    margin: 0 auto;
+}
+
+/* Form input styling */
+.login-container .form-control {
+    height: 45px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+}
+
+/* Login button styling */
+.login-container .btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    height: 45px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Logo styling */
+.login-container img {
+    max-width: 120px;
+    margin-bottom: 20px;
+}
+
+/* Hide divider lines */
+.login-container hr {
+    display: none;
+}
+
+/* Hide guest access section */
+.login-container > div:nth-of-type(1) + hr + div {
+    display: none !important;
+}
+
+/* Hide cookies notice */
+.login-container button:contains("Cookies notice"),
+.login-container .btn-secondary:contains("Cookies notice") {
+    display: none !important;
+}
+
+/* Hide the footer */
+.pagelayout-login #page-footer {
+    display: none;
+}
+
+/* Remove extra whitespace */
+.pagelayout-login #page {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Make heading and text look better */
+.login-container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.login-container p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* Style the "Forgot Password" link */
+.login-container a {
+    color: #3e7ec7;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+/* Copyright text */
+.login-container .small {
+    font-size: 12px;
+    color: #888;
+    margin-top: 25px;
+}
+
+/* Fix padding/spacing issues */
+.login-container .form-group {
+    margin-bottom: 15px;
+}

@@ -35,6 +35,122 @@
     }
 }}
 
+<style>
+    /* Ensure the body/html take full height */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Make the main content area push the footer down */
+    #page {
+        min-height: 100vh; /* Full viewport height */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Ensure the footer stays at the bottom */
+    #page-footer {
+        width: 100%;
+    }
+
+    .mobile-app-section {
+        text-align: center;
+        padding: 40px 20px;
+        margin: 0 auto;
+        max-width: 600px;
+    }
+    
+    .mobile-app-heading {
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    .app-links {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .app-link {
+        display: inline-block;
+        width: 180px;
+    }
+    
+    .app-link img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .certification {
+        margin-top: 20px;
+        text-align: center;
+    }
+    
+    .certification-heading {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .certification img {
+        width: 80px;
+        height: auto;
+    }
+    
+    /* Updated styles for copyright section */
+    .copyright-section {
+        background-color: #ffffff;
+        color: #555555;
+        padding: 20px 0;
+        width: 100%;
+        border-top: 1px solid #e5e5e5;
+    }
+    
+    .copyright-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .copyright-text {
+        font-size: 14px;
+    }
+    
+    .app-download-links {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .app-store-link {
+        display: inline-block;
+        height: 40px;
+    }
+    
+    .app-store-link img {
+        height: 100%;
+        width: auto;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .copyright-container {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .app-download-links {
+            margin-top: 15px;
+        }
+    }
+</style>
+
 <footer id="page-footer" class="footer-popover bg-white">
     <div data-region="footer-container-popover">
         {{#output.has_communication_links}}
@@ -53,19 +169,7 @@
             </div>
         {{/output.has_communication_links}}
         {{# output.has_popover_links }}
-            <div class="footer-section p-3 border-bottom">
-                {{# output.page_doc_link }}
-                    <div class="footer-support-link">{{{ output.page_doc_link }}}</div>
-                {{/ output.page_doc_link }}
-
-                {{# output.services_support_link }}
-                    <div class="footer-support-link">{{{ output.services_support_link }}}</div>
-                {{/ output.services_support_link }}
-
-                {{# output.supportemail }}
-                    <div class="footer-support-link">{{{ output.supportemail }}}</div>
-                {{/ output.supportemail }}
-            </div>
+            
         {{/ output.has_popover_links }}
         <div class="footer-section p-3 border-bottom">
             <div class="logininfo">
@@ -77,14 +181,6 @@
             {{{ output.standard_footer_html }}}
             {{{ output.standard_end_of_body_html }}}
         </div>
-        <div class="footer-section p-3">
-            <div>{{#str}}poweredbymoodle, core{{/str}}</div>
-            {{#output.moodle_release}}
-                <div>
-                    {{#str}}version, core{{/str}} {{{ output.moodle_release }}}
-                </div>
-            {{/output.moodle_release}}
-        </div>
     </div>
 
     <div class="footer-content-debugging footer-dark bg-dark text-light">
@@ -92,9 +188,27 @@
             {{{ output.debug_footer_html }}}
         </div>
     </div>
+    
+    <!-- New Copyright Section with App Store Links -->
+    <div class="copyright-section">
+        <div class="copyright-container">
+            <div class="copyright-text">© <span id="copyright-year">2025</span> Gretek Infotainment. All rights reserved.</div>
+            <div class="app-download-links">
+                <a href="#" class="app-store-link">
+                    <img src="{{config.wwwroot}}/theme/boost/pix/app-store.jpg" alt="Download on the App Store">
+                </a>
+                <a href="#" class="app-store-link">
+                    <img src="{{config.wwwroot}}/theme/boost/pix/google-play.png" alt="Get it on Google Play">
+                </a>
+            </div>
+        </div>
+    </div>
 </footer>
 {{#js}}
 require(['theme_boost/footer-popover'], function(FooterPopover) {
     FooterPopover.init();
+    
+    // Update copyright year dynamically
+    document.getElementById('copyright-year').innerText = new Date().getFullYear();
 });
 {{/js}}

@@ -229,7 +229,8 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
             set_moodle_cookie($USER->username);
         }
 
-        $urltogo = core_login_get_return_url();
+        // Always redirect to home page instead of using the return URL function
+        $urltogo = $CFG->wwwroot . '/';
 
     /// check if user password has expired
     /// Currently supported only for ldap-authentication module
@@ -279,8 +280,8 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
         unset($SESSION->loginredirect);
 
         // test the session actually works by redirecting to self
-        $SESSION->wantsurl = $urltogo;
-        redirect(new moodle_url(get_login_url(), array('testsession'=>$USER->id)));
+        // Skip the test session redirect and go directly to home
+        redirect(new moodle_url($CFG->wwwroot . '/'));
 
     } else {
         if (empty($errormsg)) {
@@ -398,6 +399,8 @@ if (isloggedin() and !isguestuser()) {
     echo $OUTPUT->box_end();
 } else {
     $loginform = new \core_auth\output\login($authsequence, $frm->username);
+    $loginform->canshowguestlogin = false; // Disable guest login button
+    $loginform->canshowcookiesnotice = false; // Disable cookies notice
     $loginform->set_error($errormsg);
     $loginform->set_info($infomsg);
     echo $OUTPUT->render($loginform);

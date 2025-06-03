@@ -1,84 +1,365 @@
-$loginbackground-gradient-from: $gray-100 !default;
-$loginbackground-gradient-to: $gray-300 !default;
-$logincontainer-bg: $white !default;
-$logincontainer-padding: 3rem !default;
-$logincontainer-shadow: $box-shadow !default;
-$logindivider-margin-top: 1.5rem !default;
-$logindivider-margin-bottom: 1.5rem !default;
-$logindivider-border: $border-color !default;
-$login-identity-provider-btn-border: $border-color !default;
+/* Login page styling for centered design with background image */
+/* Variables */
+:root {
+    --login-form-padding: 2.5rem;
+    --login-text-color: #fff;
+    --login-input-bg: rgba(255, 255, 255, 0.1);
+    --login-input-border: rgba(255, 255, 255, 0.2);
+    --login-input-focus-border: rgba(255, 255, 255, 0.5);
+    --login-button-bg: #7f5af0;
+    --login-button-hover: #6147d5;
+    --login-card-bg: rgba(0, 0, 0, 0.4);
+    --login-card-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    --login-input-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    --login-input-focus-shadow: 0 0 0 3px rgba(127, 90, 240, 0.15);
+    --login-button-shadow: 0 4px 15px rgba(127, 90, 240, 0.3);
+}
 
+/* Reset default page layout */
 .pagelayout-login #region-main {
     border: 0;
-    background-color: inherit;
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
 }
 
 .pagelayout-login #page {
-    background: $loginbackground-gradient-from;
-    @include gradient-x($loginbackground-gradient-from, $loginbackground-gradient-to, 0%, 100%);
-    div[role="main"] {
-        height: 100%;
-    }
+    background: none;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
 }
 
-.login-wrapper {
+/* Login page wrapper */
+.login-page-wrapper {
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.login-page {
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Background container with full-screen background image */
+.background-container {
+    background-image: url([[pix:theme|background]]);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+/* Add overlay to background for better readability */
+.background-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+    z-index: 1;
 }
 
+/* Add animated shape background elements */
+.background-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.03) 0%, transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 15%);
+    z-index: 1;
+    pointer-events: none;
+    animation: shimmer 20s infinite alternate;
+}
+
+@keyframes shimmer {
+    0% {
+        opacity: 0.3;
+        background-position: 0% 0%;
+    }
+    100% {
+        opacity: 0.6;
+        background-position: 100% 100%;
+    }
+}
+
+/* Login container */
 .login-container {
-    background-color: $logincontainer-bg;
-    padding: $logincontainer-padding;
-    box-shadow: $logincontainer-shadow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: var(--login-card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    box-shadow: var(--login-card-shadow);
+    animation: fadeIn 0.5s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add subtle card border effect */
+.login-card::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.1) 100%);
+    border-radius: 16px;
+    z-index: -1;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.login-card h2 {
+    font-size: 1.85rem;
     margin-bottom: 2rem;
-    @include border-radius();
-    .login-languagemenu {
-        display: flex;
-        justify-content: flex-start;
-        .dropdown-menu {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-    }
-    .login-logo {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 1rem;
-    }
-    .login-divider {
-        margin-top: $logindivider-margin-top;
-        margin-bottom: $logindivider-margin-bottom;
-        border-top: $border-width solid $logindivider-border;
-    }
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-    h1.login-heading {
-        font-size: $h2-font-size;
-    }
+/* Style form elements */
+.login-form .form-label {
+    text-align: left;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fff;
+    transition: color 0.2s;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
 
-    h2.login-heading {
-        font-size: $h4-font-size;
+.login-form .form-control {
+    width: 100%;
+    padding: 0.95rem 1.2rem;
+    margin-bottom: 1.25rem;
+    border: none;
+    border-bottom: 1px solid var(--login-input-border);
+    border-radius: 10px;
+    background-color: transparent;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    color: #fff;
+}
+
+.login-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.login-form .form-control:focus {
+    border-color: var(--login-input-focus-border);
+    box-shadow: none;
+    outline: none;
+}
+
+/* Make password field show lock icon */
+.login-form .form-control[type="password"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23aaa' viewBox='0 0 16 16'%3E%3Cpath d='M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 16px) center;
+    padding-right: 45px;
+}
+
+.login-form .btn-primary,
+.login-form .btn-secondary,
+.login-form .btn-submit {
+    width: 100%;
+    padding: 0.95rem;
+    background-color: #fff;
+    border: none;
+    border-radius: 36px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.03em;
+    margin-top: 0.5rem;
+}
+
+.login-form .btn-primary:hover,
+.login-form .btn-secondary:hover,
+.login-form .btn-submit:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.login-form .btn-primary:active,
+.login-form .btn-secondary:active,
+.login-form .btn-submit:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Additional styling for form elements */
+.login-form .form-check-label {
+    user-select: none;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.login-form .form-check {
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+}
+
+.login-form .form-check-input {
+    margin-right: 0.5rem;
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    appearance: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+.login-form .form-check-input:checked {
+    background-color: var(--login-button-bg);
+    border-color: var(--login-button-bg);
+}
+
+.login-form .form-check-input:focus {
+    box-shadow: var(--login-input-focus-shadow);
+    outline: none;
+}
+
+/* Links styling */
+.login-form a,
+.login-container a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.login-form a:hover,
+.login-container a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 576px) {
+    .login-card {
+        padding: 20px;
     }
-    .login-identityproviders {
-        .login-identityprovider-btn {
-            border: $border-width solid $login-identity-provider-btn-border;
-        }
+    
+    .login-card h2 {
+        font-size: 1.3rem;
     }
-    .divider {
-        width: $border-width;
-        background-color: $gray-300;
-        height: $font-size-base * 2;
-    }
-    .action-menu-trigger {
-        a {
-            margin: 0.5rem 0;
+}
+
+/* Adjust Moodle's default form styling */
+.login-form .form-group {
+    margin-bottom: 1rem;
+}
+
+/* Custom styling for potential error messages */
+.login-form .alert {
+    border-radius: 5px;
+}
+
+/* Style for registration link or forgot password link */
+.login-container .registration-link,
+.login-container .forgot-password-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.25rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Additional utility classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+/* Modern scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--login-button-bg);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--login-button-hover);
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    /* Desktop optimizations */
+    .background-container {
+        &::after {
+            opacity: 0.7;
         }
     }
 }
 
-@include media-breakpoint-up(md) {
-    .login-container {
-        width: 500px !important; /* stylelint-disable-line declaration-no-important */
+@media (max-width: 767px) {
+    /* Simplified for mobile */
+    .login-card {
+        padding: 25px;
+    }
+    
+    .background-container::after {
+        animation: none;
+        opacity: 0.3;
     }
 }
